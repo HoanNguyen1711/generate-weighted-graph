@@ -20,13 +20,17 @@ This script use to generate weighted graph from OpenStreetMap data
 pip3 install -r requirements.txt
 ```
 
-#### include area of map you want to generate graph in areas_list.txt
+##### include area of map you want to generate graph in areas_list.txt
 ```yaml
 ---
 areas:
   - "Quận 10"
   - "Quận 3"
   - "Quận 1"
+```
+#### or you can use bbox to specify the area which more accurate than above method, if you specify both, bbox will be used. bbox is in format of [north, south, east, west]
+```yaml
+bbox: [10.7880, 10.7591, 106.7048, 106.6556]
 ```
 
 #### include source and destination for highlight in areas_list.txt (optional, still manually find the node id)

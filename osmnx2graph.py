@@ -11,16 +11,26 @@ def load_areas():
 
 ox.config(log_console=True, use_cache=True)
 place_name = load_areas()['areas']
-src_node = load_areas()['src_node']
-dest_node = load_areas()['dest_node']
+try:
+    src_node = load_areas()['src_node']
+    dest_node = load_areas()['dest_node']
+    bbox = load_areas()['bbox']
+except KeyError:
+    src_node = None
+    dest_node = None
+    bbox = None
 
 combined_graph = None
-for place in place_name:
-    graph = ox.graph_from_place(place, network_type='drive')
-    if combined_graph is None:
-        combined_graph = graph
-    else:
-        combined_graph = nx.compose(combined_graph, graph)
+if bbox is not None:
+    graph = ox.graph_from_bbox(bbox[0], bbox[1], bbox[2], bbox[3], network_type='drive')
+    combined_graph = graph
+else:
+    for place in place_name:
+        graph = ox.graph_from_place(place, network_type='drive')
+        if combined_graph is None:
+            combined_graph = graph
+        else:
+            combined_graph = nx.compose(combined_graph, graph)
 
 graph_projected = ox.project_graph(combined_graph)
 
