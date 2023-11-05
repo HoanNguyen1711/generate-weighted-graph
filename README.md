@@ -9,8 +9,7 @@ This script use to generate weighted graph from OpenStreetMap data
 1. images/images.png: image of graph with highlight source and destination
 2. nodes_origin.csv: list of nodes in graph generated from OpenStreetMap.
    edges_origin.csv: list of edges in graph generated from OpenStreetMap.
-3. nodes_processed.csv: list of nodes in graph and its degrees (street_count).
-   edges_processed.csv: list of edges in graph and its weight (length).
+3. adj_list.txt: adjacency list as json format.
 ```
 
 ## Usage

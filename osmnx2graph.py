@@ -1,3 +1,4 @@
+import json
 import osmnx as ox
 import networkx as nx
 import yaml
@@ -7,6 +8,15 @@ def load_areas():
     with open('areas_list.yaml') as f:
         areas = yaml.load(f, Loader=yaml.FullLoader)
     return areas
+
+
+def build_graph(df):
+    graph_dict = {}
+    for _index, row in df.iterrows():
+        if row['u'] not in graph_dict:
+            graph_dict[row['u']] = {}
+        graph_dict[row['u']].update({row['v']: row['length']})
+    return graph_dict
 
 
 ox.config(log_console=True, use_cache=True)
@@ -42,15 +52,13 @@ node_sizes = [100 if node == src_node or node == dest_node else 8 for node in gr
 fig, ax = ox.plot_graph(graph_projected, node_color=node_colors, node_size=node_sizes, save=True,
                         show=False, close=True, dpi=300, figsize=(20, 20))
 
-# save graph to csv
+# save data to csv
 nodes, edges = ox.graph_to_gdfs(graph_projected)
 nodes.to_csv("nodes_origin.csv")
 edges.to_csv("edges_origin.csv")
 
-# remove unnecessary data
-nodes = nodes[['street_count']]
-edges = edges[['length', 'name']]
-nodes.to_csv("nodes_processed.csv")
-edges.to_csv("edges_processed.csv")
-
-
+# save as adjacency list in json format
+edges_df = edges.reset_index()
+graph_json = build_graph(edges_df)
+with open('adj_list.json', 'w') as f:
+    json.dump(graph_json, f)
