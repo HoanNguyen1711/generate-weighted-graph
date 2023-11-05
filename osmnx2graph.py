@@ -16,9 +16,11 @@ def build_graph(df):
         if row['u'] not in graph_dict:
             graph_dict[row['u']] = {}
         graph_dict[row['u']].update({row['v']: row['length']})
+    # handle dead ends
+    for _index, row in df.iterrows():
         if row['v'] not in graph_dict:
             graph_dict[row['v']] = {}
-        graph_dict[row['v']].update({row['u']: row['length']})
+            graph_dict[row['v']].update({row['u']: row['length']})
     return graph_dict
 
 
