@@ -65,3 +65,6 @@ edges_df = edges.reset_index()
 graph_json = build_graph(edges_df)
 with open('adj_list.json', 'w') as f:
     json.dump(graph_json, f)
+
+# save as graphml
+ox.save_graphml(graph_projected, filepath='graph.graphml')
