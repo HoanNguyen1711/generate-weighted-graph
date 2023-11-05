@@ -4,12 +4,13 @@
 This script use to generate weighted graph from OpenStreetMap data
 
 ## output
-### There are 3 kinds of output:
+### There are 4 kinds of output:
 ```
 1. images/images.png: image of graph with highlight source and destination
 2. nodes_origin.csv: list of nodes in graph generated from OpenStreetMap.
    edges_origin.csv: list of edges in graph generated from OpenStreetMap.
-3. adj_list.txt: adjacency list as json format.
+3. adj_list.json: adjacency list as json format.
+4. graph.graphml: graphml format of graph for later plotting.
 ```
 
 ## Usage
