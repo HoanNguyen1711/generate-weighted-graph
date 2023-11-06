@@ -26,18 +26,22 @@ def build_graph(df):
 
 ox.config(log_console=True, use_cache=True)
 place_name = load_areas()['areas']
+src_node = None
+dest_node = None
+bbox = None
+custom_filter = None
 try:
     src_node = load_areas()['src_node']
     dest_node = load_areas()['dest_node']
     bbox = load_areas()['bbox']
+    custom_filter = load_areas()['custom_filter']
 except KeyError:
-    src_node = None
-    dest_node = None
-    bbox = None
+    pass
 
 combined_graph = None
 if bbox is not None:
-    graph = ox.graph_from_bbox(bbox[0], bbox[1], bbox[2], bbox[3], network_type='drive')
+    graph = ox.graph_from_bbox(bbox[0], bbox[1], bbox[2], bbox[3], network_type='drive',
+                               custom_filter=custom_filter)
     combined_graph = graph
 else:
     for place in place_name:

@@ -6,3 +6,4 @@ areas:
 src_node: 2302073725 # Đai học Bách Khoa
 dest_node: 11221021745 # Chợ Bến Thành
 bbox: [10.7880, 10.7591, 106.7048, 106.6556]
+custom_filter: '["highway"~"primary|secondary|tertiary"]'

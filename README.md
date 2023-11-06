@@ -39,6 +39,12 @@ src_node: 2302073725 # Đai học Bách Khoa
 dest_node: 11221021745 # Chợ Bến Thành
 ```
 
+#### include custom filter for flexibility shrink the data (you will thank me later when dealing with Floyd-Warshall algorithm)
+```yaml
+custom_filter: '["highway"~"primary|secondary|tertiary"]'
+```
+
+
 #### run script
 ```bash
 python3 osmnx2graph.py
