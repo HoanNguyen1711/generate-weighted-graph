@@ -45,7 +45,7 @@ if bbox is not None:
     combined_graph = graph
 else:
     for place in place_name:
-        graph = ox.graph_from_place(place, network_type='drive')
+        graph = ox.graph_from_place(place, network_type='drive', custom_filter=custom_filter)
         if combined_graph is None:
             combined_graph = graph
         else:
